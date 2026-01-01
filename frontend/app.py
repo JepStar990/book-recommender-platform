@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-API_BASE = "http://localhost:8000"  # same EC2 instance
+API_BASE = "https://book-recommender-platform.onrender.com"
 
 st.set_page_config(page_title="Book Recommender", layout="wide")
 
