@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+requests
+duckdb
+python-dotenv
+scikit-learn
