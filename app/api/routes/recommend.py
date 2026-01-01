@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, Query, HTTPException
 import duckdb
 from app.api.dependencies.recommender import get_recommender
+from app.recommender.explainability.explainer import explain
 
 DB_PATH = "data/books.duckdb"
 
@@ -20,7 +21,8 @@ def recommend_by_book(
     con = duckdb.connect(DB_PATH)
 
     response = []
-    for vid, score in results:
+    for r in results:
+        vid = r["volume_id"]
         row = con.execute("""
             SELECT title
             FROM books
@@ -30,7 +32,8 @@ def recommend_by_book(
         response.append({
             "volume_id": vid,
             "title": row[0] if row else None,
-            "score": float(score)   # important: cast np.float64 → float
+            "score": float(r["score"]),
+            "reasons": explain(r["signals"])
         })
 
     con.close()

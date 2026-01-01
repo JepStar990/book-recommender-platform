@@ -14,32 +14,45 @@ class HybridRecommender:
 
         self.volume_ids = self.content.volume_ids
 
-        assert len(self.content.volume_ids) == self.category.category_matrix.shape[0], \
-            "Feature matrices are misaligned"
+        # Safety check
+        assert len(self.volume_ids) == self.category.category_matrix.shape[0]
 
     def recommend(self, volume_id: str, top_n: int = 10):
         content_scores = self.content.similarity_scores(volume_id)
         category_scores = self.category.overlap_scores(volume_id)
-
         target_level = self.skill_levels.get(volume_id)
 
-        final_scores = []
+        results = []
 
         for idx, vid in enumerate(self.volume_ids):
             if vid == volume_id:
                 continue
 
-            score = (
-                0.45 * content_scores[idx] +
-                0.25 * category_scores[idx] +
-                0.20 * self.popularity.get(vid, 0) +
-                0.10 * self.skill_matcher.score(
-                    target_level,
-                    self.skill_levels.get(vid)
-                )
+            content = content_scores[idx]
+            category = category_scores[idx]
+            popularity = self.popularity.get(vid, 0)
+            skill = self.skill_matcher.score(
+                target_level,
+                self.skill_levels.get(vid)
             )
 
-            final_scores.append((vid, score))
+            final_score = (
+                0.45 * content +
+                0.25 * category +
+                0.20 * popularity +
+                0.10 * skill
+            )
 
-        final_scores.sort(key=lambda x: x[1], reverse=True)
-        return final_scores[:top_n]
+            results.append({
+                "volume_id": vid,
+                "score": final_score,
+                "signals": {
+                    "content_similarity": content,
+                    "category_overlap": category,
+                    "popularity": popularity,
+                    "skill_match": skill
+                }
+            })
+
+        results.sort(key=lambda x: x["score"], reverse=True)
+        return results[:top_n]
