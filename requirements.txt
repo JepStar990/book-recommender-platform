@@ -1,6 +1,8 @@
 fastapi
 uvicorn
-requests
+gunicorn
 duckdb
-python-dotenv
+requests
 scikit-learn
+numpy
+pandas
