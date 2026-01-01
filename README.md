@@ -1,4 +1,4 @@
-# Hybrid Book Recommendation Platform
+# 📚Hybrid Book Recommendation Platform
 
 A production-grade, explainable book recommendation system leveraging public metadata from the Google Books ecosystem. This platform delivers relevant and transparent recommendations without relying on user ratings or interaction history, effectively solving the cold-start problem.
 
@@ -182,3 +182,4 @@ This project showcases:
 📄 **License**
 
 MIT License
+
