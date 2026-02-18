@@ -132,12 +132,12 @@ This evaluation approach aligns with academic standards for cold-start recommend
 
 | Component            | Monthly Cost |
 |----------------------|--------------|
-| Render Backend        | $0          |
-| Streamlit Frontend    | $0          |
-| DuckDB Storage        | $0          |
-| GitHub Actions        | $0          |
-| Google Books API      | $0          |
-| **Total**            | **$0**      |
+| Render Backend        | R0          |
+| Streamlit Frontend    | R0          |
+| DuckDB Storage        | R0          |
+| GitHub Actions        | R0          |
+| Google Books API      | R0          |
+| **Total**            | **R0**      |
 
 ⚠️ **Current Limitations**
 
@@ -182,4 +182,5 @@ This project showcases:
 📄 **License**
 
 MIT License
+
 
