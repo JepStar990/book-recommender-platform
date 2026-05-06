@@ -24,16 +24,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Verify FastAPI app loads
-        run: |
-          python - <<EOF
-          from app.main import app
-          print("FastAPI app loaded successfully")
-          EOF
-
-      - name: Verify recommender loads
-        run: |
-          python - <<EOF
-          from app.recommender.scoring.hybrid import HybridRecommender
-          print("HybridRecommender import OK")
-          EOF
+      - name: Run tests
+        run: python -m pytest tests/ -v

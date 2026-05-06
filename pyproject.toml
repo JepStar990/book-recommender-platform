@@ -1,0 +1,23 @@
+[project]
+name = "book-recommender-platform"
+version = "1.0.0"
+description = "Hybrid, explainable book recommendation system using Google Books metadata"
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "gunicorn",
+    "duckdb",
+    "requests",
+    "scikit-learn",
+    "numpy",
+    "pandas",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "httpx",
+    "streamlit",
+]
