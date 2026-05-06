@@ -106,7 +106,7 @@ class TestSkillLevelInference:
         text = title + " " + desc
         pages = int(df.loc[0, "page_count"]) if not pd.isna(df.loc[0, "page_count"]) else 0
 
-        assert text == ""
+        assert text.strip() == ""
         assert pages == 0
 
     def test_output_columns(self):
